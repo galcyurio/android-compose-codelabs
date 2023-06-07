@@ -23,14 +23,18 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -112,9 +116,33 @@ fun AlignYourBodyElement(
 // Step: Favorite collection card - Material Surface
 @Composable
 fun FavoriteCollectionCard(
-    modifier: Modifier = Modifier
+    painter: Painter,
+    text: String,
+    modifier: Modifier = Modifier,
 ) {
-    // Implement composable here
+    Surface(
+        shape = MaterialTheme.shapes.small,
+        modifier = modifier,
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .width(192.dp),
+        ) {
+            Image(
+                painter = painter,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(56.dp),
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                style = MaterialTheme.typography.h3,
+                text = text,
+            )
+        }
+    }
 }
 
 // Step: Align your body row - Arrangements
@@ -205,6 +233,8 @@ fun AlignYourBodyElementPreview() {
 fun FavoriteCollectionCardPreview() {
     MySootheTheme {
         FavoriteCollectionCard(
+            painter = painterResource(R.drawable.fc2_nature_meditations),
+            text = stringResource(R.string.fc2_nature_meditations),
             modifier = Modifier.padding(8.dp)
         )
     }
